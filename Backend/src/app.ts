@@ -1,6 +1,7 @@
-import express from 'express';
+import express from "express"
 import type { Request, Response } from 'express';
 import dotenv from 'dotenv';
+// import pool from "./db.js";
 dotenv.config();
 import adminRoutes from './routes/adminRoutes.js'
 
