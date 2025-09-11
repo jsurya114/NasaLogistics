@@ -7,8 +7,9 @@ export class AdminRepository{
         this.db=db
     }
 
-    async login(){
-        
+    async adminFindByEmail(email:string):Promise<Admin|null>{
+        const result = await this.db.query("SELECT * FROM admin where email=$1",[email]);
+        return result.rows[0] || null;
     }
 
 

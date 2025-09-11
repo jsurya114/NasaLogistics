@@ -2,19 +2,24 @@ import express from 'express';
 import type { Request, Response } from 'express';
 const router=express.Router();
 import { JwtService } from "./../services/JwtService.js";
-// import adminController from './../controllers/adminController.js'
+import { AdminController } from '../controllers/adminController.js';
+import { AdminService } from '../services/AdminService.js';
+import { AdminRepository } from '../repositories/AdminRepository.js';
+import { BcryptService } from '../services/BcryptService.js';
 
-const jwtService= new JwtService();
-router.post('/login',(req:Request,res:Response)=>{
-//   const payload = {id:1,email:"test@example.com"}
- const data= req.body;
-    console.log(req.url)
-  const accessToken = jwtService.generateAccesToken(data)
-  // const refreshToken = jwtService.generateRefeshToken(payload)  
-  res.json({accessToken})
-})
+import pool from '../../config/db.js';
 
-// router.post('/admin/upload-data',)
+const adminRepo = new AdminRepository(pool);
+const jwtService = new JwtService();
+const bcryptService = new BcryptService();
+const adminService = new AdminService(adminRepo,bcryptService,jwtService);
+const adminController = new AdminController(adminService);
+
+
+
+router.post('/login',adminController.login);
+
+
 
 
 

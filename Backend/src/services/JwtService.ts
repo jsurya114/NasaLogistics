@@ -17,8 +17,11 @@ export class JwtService{
     }
      
     generateAccesToken(payload:object):string{
+        // console.log("Payload at Token generation",payload)
         const options:SignOptions={expiresIn:this.jwtExpiresIn}
-        return jwt.sign(payload,this.jwtSecret,options)
+        const token=  jwt.sign(payload,this.jwtSecret,options);
+        // console.log("Token Genertaed ",token);
+        return token;
     }
 
     verifyAccessToken(token:string):any{
