@@ -7,7 +7,7 @@ import { JwtService } from "./services/JwtService.js";
 // import pool from "./db.js";
 dotenv.config();
 import adminRoutes from './routes/adminRoutes.js'
-
+import userRoutes from './routes/userRoutes.js'
 
 
 
@@ -15,16 +15,14 @@ const app = express();
 const PORT:number = Number(process.env.PORT);
 const jwtService = new JwtService()
 
-app.use(express.json())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/',userRoutes);
+app.use('/admin/login',adminRoutes)
 
 
-app.get('/login',(req:Request,res:Response)=>{
-  const payload = {id:1,email:"test@example.com"}
-console.log(req.url)
-  const accessToken = jwtService.generateAccesToken(payload)
-  // const refreshToken = jwtService.generateRefeshToken(payload)  
-  res.json({accessToken})
-})
+
 
 
 
