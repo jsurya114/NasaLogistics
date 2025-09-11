@@ -1,6 +1,6 @@
 import { Pool } from "pg";
-import dotenv from "dotenv"
-dotenv.config()
+import dotenv from "dotenv" 
+dotenv.config();
 
 const pool = new Pool({
   user: process.env.DB_USER,         // e.g. postgres
@@ -13,11 +13,9 @@ const pool = new Pool({
 
 export default pool;
 
-
-
 // async function testConnection() {
 //   try {
-//     const res = await pool.query("SELECT NOW()");
+//     const res = await pool.query("SELECT * FROM admin");
 //     console.log("Connected to DB:", res.rows[0]);
 //   } catch (err) {
 //     console.error("DB connection error:", err);
